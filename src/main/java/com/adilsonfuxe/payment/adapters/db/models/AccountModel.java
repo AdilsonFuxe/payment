@@ -4,7 +4,12 @@ import com.adilsonfuxe.payment.core.domain.models.enums.CurCode;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -25,6 +30,12 @@ public class AccountModel {
   @ManyToOne
   @JoinColumn(name = "user_id")
   private UserModel user;
+  @CreationTimestamp
+  private Instant createdAt;
+  @UpdateTimestamp
+  private Instant updatedAt;
+  @OneToMany(mappedBy = "account")
+  private List<MovementModel> movements = new ArrayList<>();
 
   public AccountModel(CurCode curCode, UserModel user, String acctId) {
     this.curCode = curCode;

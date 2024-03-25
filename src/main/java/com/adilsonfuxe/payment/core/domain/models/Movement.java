@@ -4,10 +4,10 @@ import com.adilsonfuxe.payment.core.domain.models.enums.TransactionType;
 
 import java.util.UUID;
 
-public class TransactionMoviment {
+public class Movement {
   private UUID id;
   private Transaction transaction;
-  private User from;
-  private User to;
+  private Account account;
   private TransactionType transactionType;
+  private Double amount;
 }
