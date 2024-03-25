@@ -24,4 +24,16 @@ public class User {
   private Role role;
   private Instant createdAt;
   private Instant updatedAt;
+
+
+  public User(UUID id, String firstName, String lastName, String email, String phone, Role role, Instant createdAt, Instant updatedAt) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.phone = phone;
+    this.role = role;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+  }
 }

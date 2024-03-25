@@ -3,9 +3,7 @@ package com.adilsonfuxe.payment.ports.db.models;
 import com.adilsonfuxe.payment.core.domain.models.User;
 import com.adilsonfuxe.payment.core.domain.models.enums.Role;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,6 +14,9 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class UserModel {
@@ -32,7 +33,8 @@ public class UserModel {
   @UpdateTimestamp
   private Instant updatedAt;
   @Enumerated(EnumType.STRING)
-  private Role role;
+  private Role role = Role.User;
   @OneToMany(mappedBy = "user")
   private List<AccountModel> accounts = new ArrayList<>();
+
 }
