@@ -2,7 +2,9 @@ package com.adilsonfuxe.payment.core.data.usecases;
 
 import com.adilsonfuxe.payment.core.data.protocols.cryptography.PasswordHash;
 import com.adilsonfuxe.payment.core.data.protocols.repositories.AddUserRepository;
+import com.adilsonfuxe.payment.core.domain.models.User;
 import com.adilsonfuxe.payment.core.domain.usecases.user.SignUpParams;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,5 +63,21 @@ public class DbSignUpTest {
         .phone("any_phone")
         .build();
     Mockito.verify(addUserRepository).AddUser(serializedSignupParams);
+  }
+
+  @Test
+  @DisplayName("Should return a new User on success signup")
+  void testReturnUserOnSuccessSignUp() {
+    var user = Mockito.mock(User.class);
+    var params = SignUpParams.builder()
+        .firstName("any_first_name")
+        .lastName("any_last_name")
+        .email("any_email@mail.com")
+        .password("any_password")
+        .phone("any_phone")
+        .build();
+    Mockito.when(addUserRepository.AddUser(Mockito.any(SignUpParams.class))).thenReturn(user);
+    var result = dbSignUp.signUp(params);
+    Assertions.assertSame(user, result);
   }
 }
