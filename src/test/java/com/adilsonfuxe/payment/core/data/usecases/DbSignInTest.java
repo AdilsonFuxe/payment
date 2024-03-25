@@ -75,6 +75,19 @@ public class DbSignInTest {
     Mockito.verify(passwordHashCompare).hashCompare(signUpParams.getPassword(), user.getPassword());
   }
 
+  @Test
+  @DisplayName("Should return null if passwordHashCompare return false")
+  void testPasswordHashCompareReturnFalse() {
+    var user = Mockito.mock(User.class);
+    var signUpParams = new SignInParams(
+        "any_email@mail.com",
+        "any_password"
+    );
+    Mockito.when(findUserByEmailRepository.findByEmail(signUpParams.getEmail())).thenReturn(user);
+    Mockito.when(passwordHashCompare.hashCompare(signUpParams.getPassword(), user.getPassword())).thenReturn(false);
+    var result = dbSignIn.signIn(signUpParams);
+    Assertions.assertNull(result);
+  }
 
 
 
