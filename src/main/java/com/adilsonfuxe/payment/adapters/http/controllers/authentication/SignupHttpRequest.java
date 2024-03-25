@@ -1,4 +1,4 @@
-package com.adilsonfuxe.payment.adapters.http.controllers.authentication.controllers;
+package com.adilsonfuxe.payment.adapters.http.controllers.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

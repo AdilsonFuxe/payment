@@ -1,9 +1,7 @@
-package com.adilsonfuxe.payment.adapters.http.controllers.authentication.controllers;
+package com.adilsonfuxe.payment.adapters.http.controllers.authentication;
 
 import com.adilsonfuxe.payment.core.domain.porters.in.user.SignIn;
-import com.adilsonfuxe.payment.core.domain.porters.in.user.SignUp;
 import com.adilsonfuxe.payment.core.domain.porters.in.user.dtos.SignInParams;
-import com.adilsonfuxe.payment.core.domain.porters.in.user.dtos.SignUpParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

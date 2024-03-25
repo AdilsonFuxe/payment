@@ -1,4 +1,4 @@
-package com.adilsonfuxe.payment.adapters.http.controllers.authentication.controllers;
+package com.adilsonfuxe.payment.adapters.http.controllers.authentication;
 
 import com.adilsonfuxe.payment.core.domain.porters.in.user.SignIn;
 import com.adilsonfuxe.payment.core.domain.porters.in.user.SignUp;
