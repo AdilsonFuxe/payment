@@ -89,6 +89,20 @@ public class DbSignInTest {
     Assertions.assertNull(result);
   }
 
+  @Test
+  @DisplayName("Should call Encrypt with correct userId")
+  void testCallEncryptWithCorrectUserId(){
+    var user = mockUserData();
+    var signUpParams = new SignInParams(
+        "any_email@mail.com",
+        "any_password"
+    );
+    Mockito.when(findUserByEmailRepository.findByEmail(signUpParams.getEmail())).thenReturn(user);
+    Mockito.when(passwordHashCompare.hashCompare(signUpParams.getPassword(), user.getPassword())).thenReturn(true);
+    dbSignIn.signIn(signUpParams);
+    Mockito.verify(encrypt).encrypt(user.getId().toString());
+  }
+
 
 
   User mockUserData() {
