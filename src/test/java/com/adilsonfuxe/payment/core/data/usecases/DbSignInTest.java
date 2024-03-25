@@ -1,11 +1,11 @@
 package com.adilsonfuxe.payment.core.data.usecases;
 
-import com.adilsonfuxe.payment.core.data.protocols.cryptography.Encrypt;
-import com.adilsonfuxe.payment.core.data.protocols.cryptography.PasswordHashCompare;
-import com.adilsonfuxe.payment.core.data.protocols.repositories.FindUserByEmailRepository;
+import com.adilsonfuxe.payment.core.data.porters.out.cryptography.Encrypt;
+import com.adilsonfuxe.payment.core.data.porters.out.cryptography.PasswordHashCompare;
+import com.adilsonfuxe.payment.core.data.porters.out.repositories.FindUserByEmailRepository;
 import com.adilsonfuxe.payment.core.domain.models.User;
 import com.adilsonfuxe.payment.core.domain.models.enums.Role;
-import com.adilsonfuxe.payment.core.domain.usecases.user.SignInParams;
+import com.adilsonfuxe.payment.core.domain.porters.in.user.dtos.SignInParams;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

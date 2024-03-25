@@ -1,10 +1,10 @@
 package com.adilsonfuxe.payment.core.data.usecases;
 
-import com.adilsonfuxe.payment.core.data.protocols.cryptography.Encrypt;
-import com.adilsonfuxe.payment.core.data.protocols.cryptography.PasswordHashCompare;
-import com.adilsonfuxe.payment.core.data.protocols.repositories.FindUserByEmailRepository;
-import com.adilsonfuxe.payment.core.domain.usecases.user.SignIn;
-import com.adilsonfuxe.payment.core.domain.usecases.user.SignInParams;
+import com.adilsonfuxe.payment.core.data.porters.out.cryptography.Encrypt;
+import com.adilsonfuxe.payment.core.data.porters.out.cryptography.PasswordHashCompare;
+import com.adilsonfuxe.payment.core.data.porters.out.repositories.FindUserByEmailRepository;
+import com.adilsonfuxe.payment.core.domain.porters.in.user.SignIn;
+import com.adilsonfuxe.payment.core.domain.porters.in.user.dtos.SignInParams;
 
 
 public class DbSignIn implements SignIn {
