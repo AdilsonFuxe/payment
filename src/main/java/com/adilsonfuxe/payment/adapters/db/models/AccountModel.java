@@ -16,6 +16,8 @@ public class AccountModel {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
+  @Column(unique = true, nullable = false)
+  private String acctId;
   @Enumerated(EnumType.STRING)
   private CurCode curCode;
   private Double amount = 0.0;
@@ -24,8 +26,9 @@ public class AccountModel {
   @JoinColumn(name = "user_id")
   private UserModel user;
 
-  public AccountModel(CurCode curCode, UserModel user) {
+  public AccountModel(CurCode curCode, UserModel user, String acctId) {
     this.curCode = curCode;
     this.user = user;
+    this.acctId = acctId;
   }
 }

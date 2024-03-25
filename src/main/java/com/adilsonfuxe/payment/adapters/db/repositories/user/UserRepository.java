@@ -11,6 +11,8 @@ import com.adilsonfuxe.payment.adapters.db.models.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.security.SecureRandom;
+
 @Repository
 public class UserRepository implements FindUserByEmailRepository, AddUserRepository {
 
@@ -31,8 +33,9 @@ public class UserRepository implements FindUserByEmailRepository, AddUserReposit
 
   @Override
   public User AddUser(SignUpParams params) {
-    UserModel user =new UserModel(params.getFirstName(),params.getLastName(), params.getEmail(), params.getPhone(), params.getPassword());
-    AccountModel account = new AccountModel(CurCode.AOA, user);
+    SecureRandom random = new SecureRandom();
+    UserModel user = new UserModel(params.getFirstName(), params.getLastName(), params.getEmail(), params.getPhone(), params.getPassword());
+    AccountModel account = new AccountModel(CurCode.AOA, user, String.valueOf(random.nextInt(100000000, 999999999)));
     user.getAccounts().add(account);
     var result = jpaUserRepository.save(user);
     jpaAccountRepository.save(account);
