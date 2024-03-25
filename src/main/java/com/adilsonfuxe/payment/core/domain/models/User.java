@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
@@ -21,6 +22,6 @@ public class User {
   private String phone;
   private String password;
   private Role role;
-  private String createdAt;
-  private String updatedAt;
+  private Instant createdAt;
+  private Instant updatedAt;
 }

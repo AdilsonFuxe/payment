@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Date;
 import java.util.UUID;
 
 @DisplayName("Test SignIn use case")
@@ -49,12 +50,46 @@ public class DbSignInTest {
   @Test
   @DisplayName("Should return null if findUserByEmailRepository returns null")
   void testFindUserByEmailRepositoryReturnNull() {
-    Mockito.when(findUserByEmailRepository.findByEmail(String.valueOf(String.class))).thenReturn(null);
     var signUpParams = new SignInParams(
         "any_email@mail.com",
         "any_password"
     );
+    Mockito.when(findUserByEmailRepository.findByEmail(signUpParams.getEmail())).thenReturn(null);
+
     var result = dbSignIn.signIn(signUpParams);
     Assertions.assertNull(result);
   }
+
+  @Test
+  @DisplayName("Should call passwordHashCompare with correct params")
+  void  testPasswordHashCompareWasCalledWithCorrectParams(){
+    var user = mockUserData();
+    user.setPassword("any_hashed_password");
+    var signUpParams = new SignInParams(
+        "any_email@mail.com",
+        "any_password"
+    );
+    Mockito.when(findUserByEmailRepository.findByEmail(signUpParams.getEmail())).thenReturn(user);
+
+    dbSignIn.signIn(signUpParams);
+    Mockito.verify(passwordHashCompare).hashCompare(signUpParams.getPassword(), user.getPassword());
+  }
+
+
+
+
+  User mockUserData() {
+    return  User.builder()
+        .id(UUID.randomUUID())
+        .firstName("any_first_name")
+        .lastName("any_last_name")
+        .email("any_mail@mail.com")
+        .password("any_hashed_password")
+        .role(Role.User)
+        .phone("any_phone")
+        .createdAt(new Date().toInstant())
+        .updatedAt(new Date().toInstant())
+        .build();
+  }
+
 }
