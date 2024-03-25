@@ -38,12 +38,23 @@ public class DbSignInTest {
   @Test
   @DisplayName("Should call findUserByEmailRepository with correct email")
   void testFindUserByEmailRepository() {
-    //Mockito.when(findUserByEmailRepository.findByEmail(String.valueOf(String.class))).thenReturn(null);
      var signUpParams = new SignInParams(
         "any_email@mail.com",
         "any_password"
     );
     dbSignIn.signIn(signUpParams);
     Mockito.verify(findUserByEmailRepository).findByEmail(signUpParams.getEmail());
+  }
+
+  @Test
+  @DisplayName("Should return null if findUserByEmailRepository returns null")
+  void testFindUserByEmailRepositoryReturnNull() {
+    Mockito.when(findUserByEmailRepository.findByEmail(String.valueOf(String.class))).thenReturn(null);
+    var signUpParams = new SignInParams(
+        "any_email@mail.com",
+        "any_password"
+    );
+    var result = dbSignIn.signIn(signUpParams);
+    Assertions.assertNull(result);
   }
 }
