@@ -103,6 +103,21 @@ public class DbSignInTest {
     Mockito.verify(encrypt).encrypt(user.getId().toString());
   }
 
+  @Test
+  @DisplayName("Should return a JWT accessToken on success")
+  void testDbSignInReturnTokenOnSuccess() {
+    var user = mockUserData();
+    var signUpParams = new SignInParams(
+        "any_email@mail.com",
+        "any_password"
+    );
+    Mockito.when(findUserByEmailRepository.findByEmail(signUpParams.getEmail())).thenReturn(user);
+    Mockito.when(passwordHashCompare.hashCompare(signUpParams.getPassword(), user.getPassword())).thenReturn(true);
+    Mockito.when(encrypt.encrypt(user.getId().toString())).thenReturn("any_token");
+    var result = dbSignIn.signIn(signUpParams);
+    Assertions.assertSame("any_token", result);
+  }
+
 
 
   User mockUserData() {
