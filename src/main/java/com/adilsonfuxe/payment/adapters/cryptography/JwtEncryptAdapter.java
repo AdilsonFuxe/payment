@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -16,7 +17,8 @@ import java.util.function.Function;
 
 @Service
 public class JwtEncryptAdapter implements Encrypt {
-  private static final String SECRET_KEY = "VVd2Y2cjSSFreyY/YkBATDNfeWtJQU9xQyssMUQsYUc=";
+  @Value("${spring.jwt_secret}")
+  private  String SECRET_KEY;
 
   @Override
   public String encrypt(String userId) {
